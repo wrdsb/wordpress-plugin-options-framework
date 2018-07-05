@@ -10,8 +10,7 @@ namespace WRDSB\OptionsFramework;
  * @link       https://github.com/wrdsb
  * @since      1.0.0
  *
- * @package    Wrdsb_Site_Options
- * @subpackage Wrdsb_Site_Options/includes
+ * @package    WRDSB_Options_Framework
  */
 
 /**
@@ -24,11 +23,10 @@ namespace WRDSB\OptionsFramework;
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Wrdsb_Site_Options
- * @subpackage Wrdsb_Site_Options/includes
+ * @package    WRDSB_Options_Framework
  * @author     WRDSB <website@wrdsb.ca>
  */
-class Wrdsb_Site_Options {
+class Plugin {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -36,7 +34,7 @@ class Wrdsb_Site_Options {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Wrdsb_Site_Options_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -68,30 +66,20 @@ class Wrdsb_Site_Options {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
-			$this->version = PLUGIN_NAME_VERSION;
+		if ( defined( 'WRDSB_OPTIONS_FRAMEWORK_VERSION' ) ) {
+			$this->version = WRDSB_OPTIONS_FRAMEWORK_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'wrdsb-site-options';
+		$this->plugin_name = 'wrdsb-options-framework';
 
 		$this->load_dependencies();
-		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
 	}
 
 	/**
-	 * Load the required dependencies for this plugin.
-	 *
-	 * Include the following files that make up the plugin:
-	 *
-	 * - Wrdsb_Site_Options_Loader. Orchestrates the hooks of the plugin.
-	 * - Wrdsb_Site_Options_i18n. Defines internationalization functionality.
-	 * - Wrdsb_Site_Options_Admin. Defines all hooks for the admin area.
-	 * - Wrdsb_Site_Options_Public. Defines all hooks for the public side of the site.
-	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
@@ -100,52 +88,7 @@ class Wrdsb_Site_Options {
 	 */
 	private function load_dependencies() {
 
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wrdsb-site-options-loader.php';
-
-		/**
-		 * The classes responsible for defining data model classes.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/model/class-wrdsb-site-option.php';
-
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wrdsb-site-options-i18n.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wrdsb-site-options-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wrdsb-site-options-public.php';
-
-		$this->loader = new Wrdsb_Site_Options_Loader();
-
-	}
-
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the Wrdsb_Site_Options_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function set_locale() {
-
-		$plugin_i18n = new Wrdsb_Site_Options_i18n();
-
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader = new Loader();
 
 	}
 
@@ -158,28 +101,12 @@ class Wrdsb_Site_Options {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Wrdsb_Site_Options_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Admin_UI( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_pages' );
-
-	}
-
-	/**
-	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function define_public_hooks() {
-
-		$plugin_public = new Wrdsb_Site_Options_Public( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 
@@ -207,7 +134,7 @@ class Wrdsb_Site_Options {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Wrdsb_Site_Options_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

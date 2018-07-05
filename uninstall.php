@@ -23,7 +23,7 @@ namespace WRDSB\OptionsFramework;
  * @link       https://github.com/wrdsb
  * @since      1.0.0
  *
- * @package    Wrdsb_Site_Options
+ * @package    WRDSB_Options_Framework
  */
 
 // If uninstall not called from WordPress, then exit.

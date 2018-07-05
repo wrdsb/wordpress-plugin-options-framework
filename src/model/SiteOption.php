@@ -7,10 +7,10 @@ namespace WRDSB\OptionsFramework;
  * @link       https://www.wrdsb.ca
  * @since      1.0.0
  *
- * @package    WRDSB_Site_Options
+ * @package    WRDSB_Options_Framework
  */
 
-class WRDSB_Site_Option {
+class SiteOption {
 	const OPTIONS_NAMESPACE = 'wrdsb_';
 
 	private $key;
@@ -73,7 +73,7 @@ class WRDSB_Site_Option {
 
 		foreach ( $all_options as $key => $value ) {
 			if ( self::is_namespaced_key( $key ) ) {
-				$option = new WRDSB_Site_Option( $key, $value );
+				$option = new SiteOption( $key, $value );
 				$namespaced_options[ $key ] = $option;
 			}
 		}

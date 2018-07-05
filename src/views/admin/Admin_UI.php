@@ -7,8 +7,7 @@ namespace WRDSB\OptionsFramework;
  * @link       https://github.com/wrdsb
  * @since      1.0.0
  *
- * @package    Wrdsb_Site_Options
- * @subpackage Wrdsb_Site_Options/admin
+ * @package    WRDSB_Options_Framework
  */
 
 /**
@@ -17,11 +16,10 @@ namespace WRDSB\OptionsFramework;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Wrdsb_Site_Options
- * @subpackage Wrdsb_Site_Options/admin
+ * @package    WRDSB_Options_Framework
  * @author     WRDSB <website@wrdsb.ca>
  */
-class Wrdsb_Site_Options_Admin {
+class Admin_UI {
 
 	/**
 	 * The ID of this plugin.
@@ -110,7 +108,7 @@ class Wrdsb_Site_Options_Admin {
 	public function settings_page() {
 		echo '<h1>WRDSB Options and Settings</h1>';
 		echo '<table>';
-		$options = WRDSB_Site_Option::get_all();
+		$options = SiteOption::get_all();
 		foreach ( $options as $option ) {
 			echo '<tr>';
 			echo '<td>' . $option->get_key() . '</td>';

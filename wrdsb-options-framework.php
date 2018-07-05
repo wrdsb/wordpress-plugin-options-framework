@@ -11,19 +11,18 @@ namespace WRDSB\OptionsFramework;
  *
  * @link              https://github.com/wrdsb
  * @since             1.0.0
- * @package           Wrdsb_Site_Options
+ * @package           WRDSB_Options_Framework
  *
  * @wordpress-plugin
- * Plugin Name:       WRDSB Site Options
- * Plugin URI:        https://github.com/wrdsb/wordpress-plugin-site-options
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       WRDSB Options Framework
+ * Plugin URI:        https://github.com/wrdsb/wordpress-plugin-options-framework
+ * Description:       A framework-only plugin for managing custom options and metadata for WordPress installs and individual sites.
  * Version:           1.0.0
  * Author:            WRDSB
  * Author URI:        https://github.com/wrdsb
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       wrdsb-site-options
- * Domain Path:       /languages
+ * License:           GPL-3.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
+ * Text Domain:       wrdsb-options-framework
  */
 
 // If this file is called directly, abort.
@@ -31,39 +30,17 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+require_once 'vendor/autoload.php';
+
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WRDSB_SITE_OPTIONS_VERSION', '1.0.0' );
+define( 'WRDSB_OPTIONS_FRAMEWORK_VERSION', '1.0.0' );
 
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-wrdsb-site-options-activator.php
- */
-function activate_wrdsb_site_options() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wrdsb-site-options-activator.php';
-	Wrdsb_Site_Options_Activator::activate();
-}
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-wrdsb-site-options-deactivator.php
- */
-function deactivate_wrdsb_site_options() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wrdsb-site-options-deactivator.php';
-	Wrdsb_Site_Options_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'activate_wrdsb_site_options' );
-register_deactivation_hook( __FILE__, 'deactivate_wrdsb_site_options' );
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wrdsb-site-options.php';
+register_activation_hook( __FILE__, array( __NAMESPACE__ . '\\Activator', 'activate' ) );
+register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\\Deactivator', 'deactivate' ) );
 
 /**
  * Begins execution of the plugin.
@@ -74,10 +51,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wrdsb-site-options.php';
  *
  * @since    1.0.0
  */
-function run_wrdsb_site_options() {
+function run_wrdsb_options_framework() {
 
-	$plugin = new Wrdsb_Site_Options();
+	$plugin = new Plugin();
 	$plugin->run();
 
 }
-run_wrdsb_site_options();
+run_wrdsb_options_framework();

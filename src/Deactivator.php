@@ -7,8 +7,7 @@ namespace WRDSB\OptionsFramework;
  * @link       https://github.com/wrdsb
  * @since      1.0.0
  *
- * @package    Wrdsb_Site_Options
- * @subpackage Wrdsb_Site_Options/includes
+ * @package    WRDSB_Options_Framework
  */
 
 /**
@@ -17,11 +16,10 @@ namespace WRDSB\OptionsFramework;
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Wrdsb_Site_Options
- * @subpackage Wrdsb_Site_Options/includes
+ * @package    WRDSB_Options_Framework
  * @author     WRDSB <website@wrdsb.ca>
  */
-class Wrdsb_Site_Options_Deactivator {
+class Deactivator {
 
 	/**
 	 * Short Description. (use period)
