@@ -1,2 +1,2 @@
-# WordPress Plugin Site Options
-A WordPress plugin to manage WRDSB custom options and metadata per WordPress site/blog and install. Data is stored in the site's wp_options table.
+# WordPress Plugin Options Framework
+A framework-only plugin for managing custom options and metadata for WordPress installs and individual sites. Data is stored in the site's wp_options table.
