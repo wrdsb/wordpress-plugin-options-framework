@@ -1,4 +1,5 @@
 <?php
+namespace WRDSB\OptionsFramework;
 
 /**
  * The admin-specific functionality of the plugin.

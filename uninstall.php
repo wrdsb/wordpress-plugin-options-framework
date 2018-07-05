@@ -1,4 +1,5 @@
 <?php
+namespace WRDSB\OptionsFramework;
 
 /**
  * Fired when the plugin is uninstalled.

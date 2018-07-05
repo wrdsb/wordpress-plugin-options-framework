@@ -1,4 +1,5 @@
 <?php
+namespace WRDSB\OptionsFramework;
 
 /**
  * The file that defines the core plugin class

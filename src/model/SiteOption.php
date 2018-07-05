@@ -1,4 +1,5 @@
 <?php
+namespace WRDSB\OptionsFramework;
 
 /**
  * Define the "SiteOption" class
