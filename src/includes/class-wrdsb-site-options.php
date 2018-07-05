@@ -106,6 +106,11 @@ class Wrdsb_Site_Options {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wrdsb-site-options-loader.php';
 
 		/**
+		 * The classes responsible for defining data model classes.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/model/class-wrdsb-site-option.php';
+
+		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
@@ -156,6 +161,8 @@ class Wrdsb_Site_Options {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_pages' );
 
 	}
 

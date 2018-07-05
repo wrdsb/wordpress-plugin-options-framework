@@ -1,0 +1,13 @@
+{
+    "name": "wrdsb/site-options",
+    "description": "A WordPress plugin to manage WRDSB custom options and metadata per WordPress site/blog and install. Data is stored in the site's wp_options table.",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "WRDSB",
+            "email": "website@wrdsb.ca"
+        }
+    ],
+    "require": {}
+}

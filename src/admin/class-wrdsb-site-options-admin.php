@@ -100,4 +100,23 @@ class Wrdsb_Site_Options_Admin {
 
 	}
 
+	public function add_admin_pages() {
+		add_menu_page( 'WRDSB Options and Settings', 'WRDSB', 'manage_options', 'wrdsb-settings', array( $this, 'settings_page' ) );
+		add_submenu_page( 'wrdsb-settings', 'WRDSB Options and Settings', 'WRDSB', 'manage_options', 'wrdsb-settings', array( $this, 'settings_page' ) );
+		//add_submenu_page( 'wrdsb-settings', 'My Custom Submenu Page', 'My Custom Submenu Page', 'manage_options', 'wrdsb-subslug' );
+	}
+
+	public function settings_page() {
+		echo '<h1>WRDSB Options and Settings</h1>';
+		echo '<table>';
+		$options = WRDSB_Site_Option::get_all();
+		foreach ( $options as $option ) {
+			echo '<tr>';
+			echo '<td>' . $option->get_key() . '</td>';
+			echo '<td>' . $option->get_value() . '</td>';
+			echo '</tr>';
+		}
+		echo '</table>';
+	}
+
 }
