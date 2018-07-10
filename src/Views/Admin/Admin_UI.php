@@ -1,5 +1,7 @@
 <?php
-namespace WRDSB\OptionsFramework;
+namespace WRDSB\OptionsFramework\Views\Admin;
+
+use WRDSB\OptionsFramework\Model\SiteOption;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -99,12 +101,11 @@ class Admin_UI {
 
 	}
 
-	public function add_admin_pages() {
-		add_menu_page( 'WRDSB Options and Settings', 'WRDSB', 'manage_options', 'wrdsb-settings', array( $this, 'settings_page' ) );
-		add_submenu_page( 'wrdsb-settings', 'WRDSB Options and Settings', 'WRDSB', 'manage_options', 'wrdsb-settings', array( $this, 'settings_page' ) );
-		//add_submenu_page( 'wrdsb-settings', 'My Custom Submenu Page', 'My Custom Submenu Page', 'manage_options', 'wrdsb-subslug' );
-	}
-
+	/**
+	 * Output settings page.
+	 *
+	 * @return void
+	 */
 	public function settings_page() {
 		echo '<h1>WRDSB Options and Settings</h1>';
 		echo '<table>';

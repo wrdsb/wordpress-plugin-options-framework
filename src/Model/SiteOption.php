@@ -1,5 +1,5 @@
 <?php
-namespace WRDSB\OptionsFramework;
+namespace WRDSB\OptionsFramework\Model;
 
 /**
  * Define the "SiteOption" class
@@ -10,7 +10,7 @@ namespace WRDSB\OptionsFramework;
  * @package    WRDSB_Options_Framework
  */
 
-class SiteOption {
+class SiteOption implements \JsonSerializable {
 	const OPTIONS_NAMESPACE = 'wrdsb_';
 
 	private $key;
@@ -52,6 +52,23 @@ class SiteOption {
 		return delete_option( $key );
 	}
 
+	public function to_array() {
+		$array = [
+			'key'   => $this->get_key(),
+			'value' => $this->get_value(),
+		];
+
+		return $array;
+	}
+
+	public function jsonSerialize() {
+		return $this->to_array();
+	}
+
+	public function __toString() {
+		return json_encode( $this );
+	}
+
 	private function namespace_key() {
 		$namespace = self::OPTIONS_NAMESPACE;
 		$key       = $this->key;
@@ -79,5 +96,10 @@ class SiteOption {
 		}
 
 		return $namespaced_options;
+	}
+
+	public static function find_by_key( $key ) {
+		$value = get_option( $key );
+		return new SiteOption( $key, $value );
 	}
 }

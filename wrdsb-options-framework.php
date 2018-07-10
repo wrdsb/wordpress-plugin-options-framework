@@ -30,8 +30,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-require_once 'vendor/autoload.php';
-
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
@@ -39,22 +37,30 @@ require_once 'vendor/autoload.php';
  */
 define( 'WRDSB_OPTIONS_FRAMEWORK_VERSION', '1.0.0' );
 
+require_once 'vendor/autoload.php';
+
+$container = get_container();
+
+$container['plugin'] = $container->factory( function( $c ) {
+	return new Plugin();
+});
+
 register_activation_hook( __FILE__, array( __NAMESPACE__ . '\\Activator', 'activate' ) );
 register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\\Deactivator', 'deactivate' ) );
 
+$plugin = $container['plugin'];
+$plugin->run();
+
+
 /**
- * Begins execution of the plugin.
+ * Get plugin's container
  *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
+ * @return \Pimple\Container
  */
-function run_wrdsb_options_framework() {
-
-	$plugin = new Plugin();
-	$plugin->run();
-
+function get_container() : \Pimple\Container {
+	static $container;
+	if ( ! $container ) {
+		$container = new \Pimple\Container();
+	}
+	return $container;
 }
-run_wrdsb_options_framework();

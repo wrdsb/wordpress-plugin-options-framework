@@ -9,5 +9,10 @@
             "email": "website@wrdsb.ca"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {"WRDSB\\OptionsFramework\\": "src/"}
+    },
+    "require": {
+        "pimple/pimple": "^3.2"
+    }
 }
