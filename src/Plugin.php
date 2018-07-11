@@ -104,12 +104,7 @@ class Plugin {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin      = new Admin_UI( $this->get_plugin_name(), $this->get_version() );
-		$plugin_admin_menu = new Menu( $this->get_plugin_name(), $this->get_version() );
 		$site_options_route = new SiteOptionsRoute();
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'rest_api_init', $site_options_route, 'register_routes' );
 
